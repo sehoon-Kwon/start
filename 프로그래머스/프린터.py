@@ -27,19 +27,3 @@ def solution(priorities, location):
             priorities.append(priorities.pop(0))
             result.append(result.pop(0))
 
-"""
-def solution(priorities, location):
-    queue =  [(i,p) for i,p in enumerate(priorities)]
-    answer = 0
-    while True:
-        cur = queue.pop(0)
-        if any(cur[1] < q[1] for q in queue):
-            queue.append(cur)
-        else:
-            answer += 1
-            if cur[0] == location:
-                return answer
-
-
-이건 다른사람 풀이인데 ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ
-"""
