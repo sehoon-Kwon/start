@@ -13,8 +13,7 @@ def solution(operations):
                 if b==-1:
                     heapq.heappop(heap)
                 else:
-                    mvalue=max(heap)
-                    heap.remove(mvalue)
+                    heap.pop(heap.index(heapq.nlargest(1,heap)[0]))
     if not heap:
         return [0,0]
                     
@@ -34,6 +33,6 @@ b가 1이라면 mvalue에 heap의 가장 큰값을 넣고 remove시켜준다.
 비어있지 않다면 최댓값과 최솟값으 return 시켜준다.
 
 heap연습문제들을 풀고 이 문제를 풀어서 그런지 간단히 풀 수 있었다. 발목을 잡은건
-최댓값이였는데 단순히 max를 사용해 heap의 최댓값을 뽑고 remove시키는 간단한 구현으로 성공시켰다.
+최댓값이였는데 nlargest를 통해 가장 큰값 1개의 index를 pop시켜준다.
 점점 발전하고 자신감 있게 설계하는 모습을 보니 뿌듯하다.
 """
