@@ -1,0 +1,181 @@
+"""MainActivity.java"""
+package com.example.report1;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.os.Build;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.TextClock;
+import android.widget.TextView;
+import android.widget.TimePicker;
+
+import com.google.android.filament.View;
+
+import java.sql.Time;
+import java.util.Calendar;
+
+public class MainActivity extends AppCompatActivity {
+    private TextView textView7;
+    EditText eText;
+    Button btn;
+    private TextView textView3;
+    private TextView textView4;
+    private DatePickerDialog.OnDateSetListener callbackMethod;
+    private TimePickerDialog.OnTimeSetListener callbackMethod2;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        this.InitializeView();
+        this.InitializeListener();
+        this.InitializeView2();
+        this.InitializeListener2();
+        eText=(EditText) findViewById(R.id.edittext);
+        btn=(Button)findViewById(R.id.button);
+        textView7=(TextView) findViewById(R.id.textView7);
+        btn.setOnClickListener(new android.view.View.OnClickListener() {
+            @Override
+            public void onClick(android.view.View view) {
+                String str=eText.getText().toString();
+                textView7.setText("설정인원 : "+str+"명");
+            }
+        });
+    }
+    public void InitializeView(){
+        textView3=(TextView)findViewById(R.id.textView3);
+    }
+
+    public void InitializeListener()
+    {
+        callbackMethod = new DatePickerDialog.OnDateSetListener()
+        {
+            @Override
+            public void onDateSet (DatePicker view,int year, int monthOfYear, int dayOfMonth)
+            {
+                textView3.setText("설정 날짜 : "+year + "년" + monthOfYear + "월" + dayOfMonth + "일");
+            }
+        };
+    }
+    public void InitializeView2(){
+        textView4=(TextView)findViewById(R.id.textView4);
+    }
+
+    public void InitializeListener2()
+    {
+        callbackMethod2 = new TimePickerDialog.OnTimeSetListener()
+        {
+            @Override
+            public void onTimeSet (TimePicker view,int hourOfDay, int minute)
+            {
+                textView4.setText("설정 시간 : "+hourOfDay+"시"+minute+"분");
+            }
+        };
+    }
+    public void OnClickHandler(android.view.View view)
+    {
+        DatePickerDialog dialog=new DatePickerDialog(this,callbackMethod,2019,5,24);
+        dialog.show();
+    }
+    public void OnClickHandler2(android.view.View view)
+    {
+        TimePickerDialog dialog=new TimePickerDialog(this,callbackMethod2,8,10,false);
+        dialog.show();
+    }
+
+
+}
+"""activity_main.xml"""
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:textAlignment="center"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="예약을 원하는 날짜와 시간, 인원을 선택하시오."/>
+
+    <Button
+        android:id="@+id/selectDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="OnClickHandler"
+        android:gravity="center"
+        android:text="날짜 설정"/>
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="날짜를 선택하세요"/>
+    <Button
+        android:id="@+id/selectDate2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="OnClickHandler2"
+        android:gravity="center"
+        android:text="시간설정"/>
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="시간을 선택하세요"/>
+    <EditText
+        android:id="@+id/edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="인원수를 입력해주세요" />
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="입력"/>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textSize="30dp"
+        android:text="선택된 날짜"/>
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textSize="30dp"
+        android:text="선택된 시간"/>
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textSize="30dp"
+        android:text="선택된 인원수"/>
+</LinearLayout>
+
+"""
+과제로만든 날짜와 시간과 인원수를 입력받아 나타내는 android studio 문제이다.
+"""
