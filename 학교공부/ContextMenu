@@ -1,0 +1,84 @@
+"""MainActivity.java"""
+package com.example.minialbam;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+
+public class MainActivity extends AppCompatActivity {
+    TextView text;
+    Button btn01;
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        text = (TextView) findViewById(R.id.TextView01);
+        btn01=(Button)findViewById(R.id.btn01);
+        registerForContextMenu(btn01);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.setHeaderTitle("텍스트색상변경");
+        menu.add(0, 1, 0, "RED");
+        menu.add(0, 2, 0, "GREEN");
+        menu.add(0, 3, 0, "BLUE");
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case 1:
+                text.setTextColor(Color.RED);
+
+                return true;
+            case 2:
+                text.setTextColor(Color.GREEN);
+                return true;
+            case 3:
+                text.setTextColor(Color.BLUE);
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
+}
+"""activity_main.xml"""
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:id="@+id/LinearLayout01"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Only I can change my life. No one can do it for me."
+        android:textSize="200px"
+        android:typeface="serif" />
+    <Button
+        android:id="@+id/btn01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="LONG-TOUCH HERE(글자색변경)"/>
+
+</LinearLayout>
+"""시험 공부로 풀어본 ContextMenu  """
